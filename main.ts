@@ -1,8 +1,7 @@
-// Fresh-surge momentum bot: buys pump.fun curves only when a crowd is visibly
-// arriving (several distinct buyers, net SOL flowing in, price climbing near its
-// recent high and accelerating), starts small, adds into strength, and exits whole
-// on a stop loss, a trailing stop, a fade, or a time limit. See strategy.ts.
+// Entry point. The strategy lives in strategy.ts; the replay protocol (stdin/stdout,
+// hello/batch/done) lives in the vendored SDK shim. Nothing to install: Node 22 runs
+// this file as it is.
 import { runBot } from './vendor/makefun-bot.ts';
-import { createStrategy, DEFAULT_PARAMS } from './strategy.ts';
+import { createStrategy as buildSniper, DEFAULT_PARAMS as TUNING } from './strategy.ts';
 
-await runBot(createStrategy(DEFAULT_PARAMS));
+await runBot(buildSniper(TUNING));
